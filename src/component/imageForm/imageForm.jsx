@@ -1,4 +1,4 @@
-import "../imageForm/imageForm.css"
+import styles from "./imageForm.module.css";
 import { useEffect, useRef } from "react";
 
 export const ImageForm = ({
@@ -33,13 +33,11 @@ export const ImageForm = ({
   };
 
   useEffect(() => {
-    if (updateIntent) {
-      handleDefaultValues();
-    }
+    if (updateIntent) handleDefaultValues();
   }, [updateIntent]);
 
   return (
-    <div className="imageForm">
+    <div className={styles.imageForm}>
       <span>
         {!updateIntent
           ? `Add image to ${albumName}`
@@ -49,11 +47,14 @@ export const ImageForm = ({
       <form onSubmit={handleSubmit}>
         <input required placeholder="Title" ref={imageTitleInput} />
         <input required placeholder="Image URL" ref={imageUrlInput} />
-        <div className="actions">
+
+        <div className={styles.actions}>
           <button type="button" onClick={handleClear} disabled={loading}>
             Clear
           </button>
-          <button disabled={loading}>{!updateIntent ? "Add" : "Update"}</button>
+          <button disabled={loading}>
+            {!updateIntent ? "Add" : "Update"}
+          </button>
         </div>
       </form>
     </div>

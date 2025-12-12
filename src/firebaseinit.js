@@ -6,12 +6,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCO-2HdMeCBe9t8YNnbtIyZsfdJK2AhWJM",
-  authDomain: "photofolio-app-12406.firebaseapp.com",
-  projectId: "photofolio-app-12406",
-  storageBucket: "photofolio-app-12406.firebasestorage.app",
-  messagingSenderId: "60357879633",
-  appId: "1:60357879633:web:b19f563869419ab65d5570"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_PROJECT_ID,
+  messagingSenderId: import.meta.env.VITE_STORAGE_BUCKET,
+  appId: import.meta.env.VITE_APP_ID
 };
 
 // Initialize Firebase

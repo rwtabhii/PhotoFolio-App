@@ -1,4 +1,4 @@
-import "../albumForm/albumForm.css";
+import styles from "./albumForm.module.css"
 import { useRef } from "react";
 
 export const AlbumForm = ({ onAdd, loading }) => {
@@ -15,14 +15,29 @@ export const AlbumForm = ({ onAdd, loading }) => {
   };
 
   return (
-    <div className="albumForm">
+    <div className={styles.albumForm}>
       <span>Create an album</span>
-      <form onSubmit={handleSubmit}>
-        <input required placeholder="Album Name" ref={albumNameInput} />
-        <button type="button" onClick={handleClear} disabled={loading}>
+
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <input
+          required
+          placeholder="Album Name"
+          ref={albumNameInput}
+          className={styles.input}
+        />
+
+        <button
+          type="button"
+          onClick={handleClear}
+          disabled={loading}
+          className={`${styles.button} ${styles.clearBtn}`}
+        >
           Clear
         </button>
-        <button disabled={loading}>Create</button>
+
+        <button className={styles.button} disabled={loading}>
+          Create
+        </button>
       </form>
     </div>
   );

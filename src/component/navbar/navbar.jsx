@@ -1,15 +1,15 @@
-import "../navbar/navbar.css"
+import styles from "./navbar.module.css";
 import logo from "../../assets/photofolio-icon.webp";
 
 export const Navbar = () => {
   return (
-    <div className="navbar">
+    <div className={styles.navbar}>
       <div
-        className="logo"
+        className={styles.logo}
         onClick={() => window.location.replace("/")}
       >
         <img src={logo} alt="logo" />
-        <span>PhotoFolio</span>
+        <span className={styles.brand}>PhotoFolio</span>
       </div>
     </div>
   );

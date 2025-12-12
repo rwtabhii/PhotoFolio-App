@@ -1,4 +1,4 @@
-import "./imageList.css";
+import styles from "./imageList.module.css";
 import backlogo from "../../assets/back.png";
 import editlogo from "../../assets/edit.png";
 import searchlogo from "../../assets/search.png";
@@ -29,7 +29,6 @@ export const ImageList = ({ albumId, albumName, onBack }) => {
   const [mode, setMode] = useState(null); // "add" | "update"
   const [currentImage, setCurrentImage] = useState(null);
 
-  // fetch images
   const fetchImages = async () => {
     setLoading(true);
     const data = await fetchImagesApi(albumId);
@@ -41,7 +40,6 @@ export const ImageList = ({ albumId, albumName, onBack }) => {
     fetchImages();
   }, [albumId]);
 
-  // add image
   const handleAdd = async ({ title, url }) => {
     const newImage = await addImageApi(albumId, { title, url });
     setImages([newImage, ...images]);
@@ -49,7 +47,6 @@ export const ImageList = ({ albumId, albumName, onBack }) => {
     setMode(null);
   };
 
-  // update image
   const handleUpdate = async ({ title, url }) => {
     const updated = await updateImageApi(albumId, currentImage.id, {
       title,
@@ -61,7 +58,6 @@ export const ImageList = ({ albumId, albumName, onBack }) => {
     setCurrentImage(null);
   };
 
-  // delete image
   const handleDelete = async (e, id) => {
     e.stopPropagation();
     await deleteImageApi(albumId, id);
@@ -69,21 +65,18 @@ export const ImageList = ({ albumId, albumName, onBack }) => {
     toast.success("Image deleted.");
   };
 
-  // filter
   const filtered = images.filter((i) =>
     i.title.toLowerCase().includes(search.toLowerCase())
   );
 
-  // loading
   if (loading) {
     return (
-      <div className="loader">
+      <div className={styles.loader}>
         <Spinner color="#0077ff" />
       </div>
     );
   }
 
-  // carousel view
   if (selectedImageIndex !== null) {
     const img = filtered[selectedImageIndex];
     return (
@@ -107,10 +100,8 @@ export const ImageList = ({ albumId, albumName, onBack }) => {
 
   return (
     <>
-      {/* form */}
-      {mode === "add" && (
-        <ImageForm albumName={albumName} onAdd={handleAdd} />
-      )}
+      {mode === "add" && <ImageForm albumName={albumName} onAdd={handleAdd} />}
+
       {mode === "update" && (
         <ImageForm
           albumName={albumName}
@@ -119,60 +110,47 @@ export const ImageList = ({ albumId, albumName, onBack }) => {
         />
       )}
 
-      {/* top bar */}
-      <div className="top">
+      <div className={styles.top}>
         <span onClick={onBack}>
           <img src={backlogo} alt="back" />
         </span>
+
         <h3>Images in {albumName}</h3>
 
-        {/* search */}
-        <div className="search">
+        <div className={styles.search}>
           <input
             placeholder="Search..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          {search && (
-            <img
-              src={clearlogo}
-              alt="clear"
-              onClick={() => setSearch("")}
-              style={{ cursor: "pointer" }}
-            />
+          {search ? (
+            <img src={clearlogo} alt="clear" onClick={() => setSearch("")} />
+          ) : (
+            <img src={searchlogo} alt="search" />
           )}
-          {!search && <img src={searchlogo} alt="search" />}
         </div>
 
-        {/* action buttons */}
-        {mode && (
-          <button className="active" onClick={() => setMode(null)}>
+        {mode ? (
+          <button className={styles.active} onClick={() => setMode(null)}>
             Cancel
           </button>
-        )}
-        {!mode && (
-          <button
-            className={`${mode === "add" && "active"}`}
-            onClick={() => setMode("add")}
-          >
-            Add image
-          </button>
+        ) : (
+          <button onClick={() => setMode("add")}>Add image</button>
         )}
       </div>
 
-      {/* list */}
       {filtered.length === 0 ? (
         <h4 style={{ textAlign: "center" }}>No images found.</h4>
       ) : (
-        <div className="imageList">
+        <div className={styles.imageList}>
           {filtered.map((img, i) => (
             <div
               key={img.id}
-              className="image"
+              className={styles.image}
               onClick={() => setSelectedImageIndex(i)}
             >
               <div
-                className="update"
+                className={styles.update}
                 onClick={(e) => {
                   e.stopPropagation();
                   setMode("update");
@@ -181,9 +159,11 @@ export const ImageList = ({ albumId, albumName, onBack }) => {
               >
                 <img src={editlogo} alt="edit" />
               </div>
-              <div className="delete" onClick={(e) => handleDelete(e, img.id)}>
+
+              <div className={styles.delete} onClick={(e) => handleDelete(e, img.id)}>
                 <img src={trashlogo} alt="delete" />
               </div>
+
               <img
                 src={img.url}
                 alt={img.title}

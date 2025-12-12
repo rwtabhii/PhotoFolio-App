@@ -1,4 +1,4 @@
-import "../src/app.css"
+import "./App.css"
 
 // Components imports
 import {Navbar} from "../src/component/navbar/navbar.jsx"
