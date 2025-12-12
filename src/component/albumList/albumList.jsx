@@ -9,7 +9,7 @@ import { Timestamp } from "firebase/firestore";
 import { addAlbumApi, deleteAlbumApi, fetchAlbumsApi } from "../../api/albumApi.js";
 
 // components imports
-import {AlbumForm} from "../albumForm/albumForm.jsx"
+import { AlbumForm } from "../albumForm/albumFormComponent.jsx";
 import { ImageList } from "../imageList/imageList.jsx";
 
 export const AlbumList = () => {

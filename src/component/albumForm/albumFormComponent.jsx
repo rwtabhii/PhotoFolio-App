@@ -1,7 +1,7 @@
 import styles from "./albumForm.module.css"
 import { useRef } from "react";
 
-export const AlbumForm = ({ onAdd, loading }) => {
+export function AlbumForm({ onAdd, loading }) {
   const albumNameInput = useRef();
 
   const handleClear = () => (albumNameInput.current.value = "");
