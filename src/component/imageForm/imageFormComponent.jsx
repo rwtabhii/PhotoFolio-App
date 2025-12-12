@@ -1,13 +1,13 @@
 import styles from "./imageForm.module.css";
 import { useEffect, useRef } from "react";
 
-export const ImageForm = ({
+export function ImageForm ({
   updateIntent,
   albumName,
   onAdd,
   onUpdate,
   loading,
-}) => {
+}) {
   const imageTitleInput = useRef();
   const imageUrlInput = useRef();
 

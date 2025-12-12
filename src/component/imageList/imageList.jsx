@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Spinner from "react-spinner-material";
 
 // components
-import { ImageForm } from "../imageForm/imageForm.jsx";
+import { ImageForm } from "../imageForm/imageFormComponent.jsx";
 import { Carousel } from "../carousel/Carousel.jsx";
 
 // api
